@@ -20,10 +20,8 @@ def majority_element(nums, dictionary):
     if len(nums) == 0:
         return max(dictionary, key=dictionary.get)
     current = nums.pop(0)
-    dictionary.get(current)
     if dictionary.get(current) is None: dictionary[current] = 1
     else: dictionary[current] += 1
-    print(dictionary)
     return majority_element(nums, dictionary)
 
 
