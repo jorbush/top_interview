@@ -43,28 +43,28 @@ def maxProfit(prices):
     :type prices: List[int]
     :rtype: int
     """
-    return max_profit(prices[1:], prices[0], 0, 0, list())
+    return max_profit(prices[1:], prices[0], 0, 0, 0)
 
 
-def max_profit(prices, buy, profit, ind, profits):
+def max_profit(prices, buy, profit, ind, total_profit):
     if ind == len(prices):
-        return sum(profits)
+        return total_profit
     sell = prices[ind]
     new_profit = sell - buy
     # print(f'{new_profit} {profit}')
     if new_profit < profit and profit > 0:
-        profits.append(profit)
+        total_profit += profit
         buy = sell
         profit = 0
     else:
         if (ind == len(prices) - 1) and new_profit > 0:
-            profits.append(new_profit)
+            total_profit += new_profit
         if new_profit > profit:
             profit = new_profit
         if sell < buy:
             buy = sell
     # print(f'{buy} {sell} {profits}')
-    return max_profit(prices, buy, profit, ind + 1, profits)
+    return max_profit(prices, buy, profit, ind + 1, total_profit)
 
 
 if __name__ == "__main__":
